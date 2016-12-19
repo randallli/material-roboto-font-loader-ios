@@ -381,6 +381,24 @@ NSString *const MDFRobotoBundle = @"MaterialRobotoFontLoader.bundle";
   }
 }
 
+- (void)testIsItalic {
+  // Given
+  MDFRobotoFontLoader *fontLoader = [[MDFRobotoFontLoader alloc] initInternal];
+  UIFont *bold = [fontLoader boldFontOfSize:10];
+  UIFont *regular = [fontLoader regularFontOfSize:10];
+  UIFont *italic = [fontLoader italicFontOfSize:10];
+
+  // When
+  UIFontDescriptor *fontD = [regular.fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
+  UIFont *font = [UIFont fontWithDescriptor:fontD size:0];
+
+  [UIFont systemFontOfSize:10 weight:10];
+
+  // Then
+  XCTAssertEqualObjects(font, bold);
+
+}
+
 - (void)testResetingBaseBundle {
   // Given
   MDFRobotoFontLoader *fontLoader = [[MDFRobotoFontLoader alloc] initInternal];
